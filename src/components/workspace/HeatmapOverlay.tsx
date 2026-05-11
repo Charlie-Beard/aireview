@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import type { HeatmapPoint } from '../../types'
-import { animateHeatmap } from '../../utils/heatmapUtils'
+import { drawHeatmap } from '../../utils/heatmapUtils'
 
 interface Props {
   points: HeatmapPoint[]
@@ -12,19 +12,13 @@ interface Props {
 
 export default function HeatmapOverlay({ points, visible, width, height }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const stopRef   = useRef<(() => void) | null>(null)
 
   useEffect(() => {
     const canvas = canvasRef.current
-    if (!canvas || !visible) {
-      stopRef.current?.()
-      return
-    }
+    if (!canvas) return
     canvas.width  = width
     canvas.height = height
-    stopRef.current?.()
-    stopRef.current = animateHeatmap(canvas, points)
-    return () => stopRef.current?.()
+    if (visible) drawHeatmap(canvas, points)
   }, [visible, points, width, height])
 
   return (

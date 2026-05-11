@@ -46,24 +46,3 @@ export function drawHeatmap(
   }
 }
 
-export function animateHeatmap(
-  canvas: HTMLCanvasElement,
-  points: HeatmapPoint[],
-): () => void {
-  let frame: number
-  let tick = 0
-
-  const loop = () => {
-    tick += 0.015
-    // Pulse intensity
-    const pulsed = points.map((pt) => ({
-      ...pt,
-      intensity: pt.intensity * (0.85 + 0.15 * Math.sin(tick + pt.x * 0.1)),
-    }))
-    drawHeatmap(canvas, pulsed, 0.78)
-    frame = requestAnimationFrame(loop)
-  }
-  loop()
-
-  return () => cancelAnimationFrame(frame)
-}
