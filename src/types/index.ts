@@ -1,4 +1,4 @@
-export type AppView = 'landing' | 'analyzing' | 'workspace'
+export type AppView = 'landing' | 'analyzing' | 'workspace' | 'howItWorks'
 
 export type SeverityLevel = 'critical' | 'major' | 'minor' | 'suggestion'
 

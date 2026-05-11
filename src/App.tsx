@@ -4,6 +4,7 @@ import { useStore } from './store/useStore'
 import LandingPage    from './components/landing/LandingPage'
 import AnalysisScreen from './components/analysis/AnalysisScreen'
 import WorkspacePage  from './components/workspace/WorkspacePage'
+import HowItWorksPage from './components/howItWorks/HowItWorksPage'
 
 export default function App() {
   const view = useStore((s) => s.view)
@@ -59,6 +60,18 @@ export default function App() {
           style={{ height: '100dvh' }}
         >
           <WorkspacePage />
+        </motion.div>
+      )}
+
+      {view === 'howItWorks' && (
+        <motion.div
+          key="howItWorks"
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -8 }}
+          transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <HowItWorksPage />
         </motion.div>
       )}
     </AnimatePresence>

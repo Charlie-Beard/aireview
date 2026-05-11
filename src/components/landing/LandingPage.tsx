@@ -172,6 +172,17 @@ export default function LandingPage() {
         </div>
 
         <div className="flex items-center gap-2">
+          <button
+            onClick={() => useStore.getState().setView('howItWorks')}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all hover:-translate-y-px"
+            style={{
+              background: 'rgba(38,139,210,0.08)',
+              border: '1px solid rgba(38,139,210,0.20)',
+              color: '#268BD2',
+            }}
+          >
+            How it works
+          </button>
           <div
             className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs text-sol-base01 cursor-pointer"
             style={{ background: 'rgba(0,0,0,0.04)', border: '1px solid rgba(0,0,0,0.08)' }}
