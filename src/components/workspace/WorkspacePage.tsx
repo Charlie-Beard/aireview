@@ -71,10 +71,6 @@ export default function WorkspacePage() {
         const next = clamp(scale.get() * (1 - dy * 0.002), MIN_SCALE, MAX_SCALE)
         scale.set(next)
       },
-      onDoubleClick: () => {
-        haptic('medium')
-        x.set(0); y.set(0); scale.set(1)
-      },
     },
     {
       target: imageRef as React.RefObject<HTMLElement>,
@@ -102,6 +98,17 @@ export default function WorkspacePage() {
   const resetTransform = useCallback(() => {
     x.set(0); y.set(0); scale.set(1)
   }, [x, y, scale])
+
+  // Native dblclick — useGesture doesn't expose a double-click handler
+  useEffect(() => {
+    const el = imageRef.current
+    if (!el) return
+    const onDblClick = () => { haptic('medium'); resetTransform() }
+    el.addEventListener('dblclick', onDblClick)
+    return () => el.removeEventListener('dblclick', onDblClick)
+  // imageRef.current is stable after mount; resetTransform is memoised
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [resetTransform])
 
   if (!uploadedImage || !critique) return null
 
@@ -252,7 +259,7 @@ export default function WorkspacePage() {
           transition={{ delay: 1.5 }}
         >
           <Eye size={11} />
-          pinch or scroll to zoom · double-tap to reset
+          pinch or scroll to zoom · double-click / double-tap to reset
         </motion.div>
       </div>
 

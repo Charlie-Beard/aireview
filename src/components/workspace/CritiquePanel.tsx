@@ -427,14 +427,14 @@ export default function CritiquePanel() {
                       <span className="text-xs font-medium text-sol-base01">{item.label}</span>
                       <button
                         onClick={item.toggle}
-                        className="relative w-10 h-5.5 rounded-full transition-colors flex-shrink-0"
+                        className="relative rounded-full transition-colors flex-shrink-0"
                         style={{
                           background: item.state ? '#268BD2' : 'rgba(0,0,0,0.12)',
                           width: 40, height: 22,
                         }}
                       >
                         <motion.div
-                          className="absolute top-0.5 w-4.5 h-4.5 rounded-full bg-white"
+                          className="absolute rounded-full bg-white"
                           style={{ width: 18, height: 18, top: 2 }}
                           animate={{ left: item.state ? 20 : 2 }}
                           transition={{ type: 'spring', stiffness: 500, damping: 30 }}

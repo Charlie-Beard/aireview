@@ -33,7 +33,7 @@ export default function HeatmapOverlay({ points, visible, width, height }: Props
       initial={{ opacity: 0 }}
       animate={{ opacity: visible ? 1 : 0 }}
       transition={{ duration: 0.4 }}
-      style={{ mixBlendMode: 'multiply' }}
+      style={{ mixBlendMode: 'hard-light' }}
     >
       <canvas
         ref={canvasRef}
